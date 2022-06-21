@@ -1,13 +1,15 @@
 @import url('https://cdn.jsdelivr.net/gh/mailtoharshit/San-Francisco-Font-/sanfrancisco.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
 
+* {
+    font-family: 'San-Francisco-Font', sans-serif;
+}
+
 body {
     margin: 0;
     padding: 0;
     background: #121212;
     color: white;
-
-    font-family: 'San-Francisco-Font', sans-serif;
 
     width: 100vw;
     height: 100vh;
@@ -62,7 +64,7 @@ body {
     visibility: hidden;
     
     width: 75%;
-    height: 50%;
+    height: 70%;
 
     background-color: #373737;
     border: 1px solid #444444;
@@ -102,4 +104,39 @@ body {
     font-size: 30px;
     top: 10px;
     right: 10px;
+}
+
+.station-title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.station-description {
+    font-weight: normal;
+    font-size: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: calc(100% - 40px);
+    padding-top: 20px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.station-status {
+    font-weight: normal;
+    font-size: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: calc(100% - 40px);
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+
+.status-text {
+    color: red;
+}
+
+.running {
+    color: green;
 }

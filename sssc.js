@@ -1,22 +1,27 @@
 let stations = [
     {
         'station_name': 'A',
+        'station_description': 'Station A',
         'station_id': 1
     },
     {
         'station_name': 'B',
+        'station_description': 'Station B',
         'station_id': 2
     },
     {
         'station_name': 'C',
+        'station_description': 'Station C',
         'station_id': 3
     },
     {
         'station_name': 'D',
+        'station_description': 'Station D',
         'station_id': 4
     },
     {
         'station_name': 'E',
+        'station_description': 'Station E',
         'station_id': 5
     }
 ];
@@ -41,7 +46,13 @@ class SprinklerController {
             body.append(`<div class="background-blur" id="bg-blur-${station.station_id}"></div>`);
             body.append(`
 <div class="station-popup" id="station-popup-${station.station_id}">
-    <h1 class="text-center">Sprinkler ${station.station_name}</h1>
+    <h1 class="station-title text-center">Sprinkler ${station.station_name}</h1>
+    
+    <br>
+    
+    <p class="station-description">${station.station_description}</p>
+    <p class="station-status">Status: <span class="status-text running">Running</span></p>
+
     <button class="close-btn" onclick="toggleStationPopup(${station.station_id});">
         <i class="fa-solid fa-xmark"></i>
     </button>
@@ -72,16 +83,13 @@ class SprinklerController {
 }
 
 $(document).ready(function() {
-    stationsContainer = $('#stations-container');
+    stationsContainer = $('#stations-container'); // Get the stations container
+    
     let SSSC = new SprinklerController(stations, "http://127.0.0.1/sip/", stationsContainer);
-    SSSC.init();
+    SSSC.init(); // Initialize
 });
 
-function stationClicked(stationID) { 
-    // stationID = (stationID - 1);
-    // console.log('Station Clicked:');
-    // console.log(stations[stationID]);
-
+function stationClicked(stationID) {
     toggleStationPopup(stationID);
 }
 
