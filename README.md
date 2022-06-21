@@ -1,4 +1,6 @@
 # SSSC
-Stupidly Simple Sprinkler Controller for SIP Sprinkler Controller (https://github.com/Dan-in-CA/SIP/)
+## Stupidly Simple Sprinkler Controller
 
-Note: this is a WIP and may have bugs!
+SIP Sprinkler Controller interface made using the SIP Sprinkler Contrller HTTP GET commands.
+
+###### `Note: this is a WIP (work-in-progress) and may have bugs!`
