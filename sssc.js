@@ -33,10 +33,13 @@ class SprinklerController {
 
     init() {
         // Initializes the SprinklerController
+        let body = $('body'); // Grab the document body
 
         // Loop through the stations and add them into the stations container
         this.stations.forEach(station => {
             this.stationsContainer.append(`<div id="station_${station.station_id}" data-station-id="${station.station_id}" class="station" onclick="stationClicked(${station.station_id});">${station.station_name}</div>`);
+            body.append(`<div class="background-blur" id="bg-blur-${station.station_id}"></div>`);
+            body.append(`<div class="station-popup" id="station-popup-${station.station_id}">\n<h1 class="text-center">Sprinkler ${station.station_name}</h1>\n<button class="close-btn" onclick="toggleStationPopup(${station.station_id});"><i class="fa-solid fa-xmark"></i></button>\n</div>`);
         });
     }
 
