@@ -69,7 +69,17 @@ $(document).ready(function() {
 });
 
 function stationClicked(stationID) { 
-    stationID = (stationID - 1);
-    console.log("Station Clicked:");
-    console.log(stations[stationID]);
+    // stationID = (stationID - 1);
+    // console.log('Station Clicked:');
+    // console.log(stations[stationID]);
+
+    toggleStationPopup(stationID);
+}
+
+function toggleStationPopup(stationID) {
+    let stationPopup = $('#station-popup-' + String(stationID));
+    let stationPopupBlur = $('#bg-blur-' + String(stationID));
+    
+    stationPopup.toggleClass('show-popup');
+    stationPopupBlur.toggleClass('visible');
 }
