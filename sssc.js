@@ -36,7 +36,7 @@ class SprinklerController {
 
         // Loop through the stations and add them into the stations container
         this.stations.forEach(station => {
-            this.stationsContainer.append(`<div id="station_${station.station_id}" data-station-id="${station.station_id}" class="station" onclick="javascript:stationClicked(${station.station_id})">${station.station_name}</div>`);
+            this.stationsContainer.append(`<div id="station_${station.station_id}" data-station-id="${station.station_id}" class="station" onclick="stationClicked(${station.station_id});">${station.station_name}</div>`);
         });
     }
 
