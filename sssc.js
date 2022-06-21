@@ -1,37 +1,43 @@
-let stations = {
-    'A': {
+let stations = [
+    {
         'station_name': 'A',
         'station_id': 1
     },
-    'B': {
+    {
         'station_name': 'B',
         'station_id': 2
     },
-    'C': {
-        'station_name': 'e',
+    {
+        'station_name': 'C',
         'station_id': 3
     },
-    'D': {
+    {
         'station_name': 'D',
         'station_id': 4
     },
-    'E': {
+    {
         'station_name': 'E',
         'station_id': 5
     }
-};
+];
 
 let stationsContainer;
 
 
 class SprinklerController {
-    constructor(stations, server) {
+    constructor(stations, server, appStationsContainer) {
         this.stations = stations;
         this.server = server;
+        this.stationsContainer = appStationsContainer;
     }
 
     init() {
-        // Initialize the SprinklerController
+        // Initializes the SprinklerController
+
+        // Loop through the stations and add them into the stations container
+        this.stations.forEach(station => {
+            this.stationsContainer.append(`<div id="station_${station.station_id}" data-station-id="${station.station_id}" class="station" onclick="javascript:stationClicked(${station.station_id})">${station.station_name}</div>`);
+        });
     }
 
     startStation(stationID, callback = function(data, status) { console.log(data); console.log(status); }) {
@@ -58,8 +64,12 @@ class SprinklerController {
 
 $(document).ready(function() {
     stationsContainer = $('#stations-container');
-
-    let SC = new SprinklerController(stations, "http://127.0.0.1/sip/");
-    SC.init();
-    SC.startStation(1);
+    let SSSC = new SprinklerController(stations, "http://127.0.0.1/sip/", stationsContainer);
+    SSSC.init();
 });
+
+function stationClicked(stationID) { 
+    stationID = (stationID - 1);
+    console.log("Station Clicked:");
+    console.log(stations[stationID]);
+}
