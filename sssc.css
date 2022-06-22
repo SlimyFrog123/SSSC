@@ -149,6 +149,9 @@ body {
     font-size: 20px;
     cursor: pointer;
     color: white;
+    outline: none;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .min-width-100 {
@@ -161,10 +164,6 @@ body {
 
 .app-btn:active {
     background: #2b2b2b;
-}
-
-.app-btn {
-    outline: none;
 }
 
 .app-btn-container {
