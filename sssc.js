@@ -56,7 +56,7 @@ class SprinklerController {
 
     <div class="app-btn-container">
         <button class="app-btn min-width-100" onclick="stopStation(${station.station_id})">Stop</button>
-        <select class="app-btn min-width-100" id="station-time-${station.station_id}>
+        <select class="app-btn min-width-100" id="station-time-${station.station_id}">
             <option value="1">1 Minute</option>
             <option value="5">5 Minutes</option>
             <option value="10">10 Minutes</option>
