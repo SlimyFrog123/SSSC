@@ -93,7 +93,7 @@ class SprinklerController {
 $(document).ready(function() {
     stationsContainer = $('#stations-container'); // Get the stations container
     
-    let SSSC = new SprinklerController(stations, "http://127.0.0.1/sip/", stationsContainer);
+    let SSSC = new SprinklerController(stations, "http://127.0.0.1/sip/", "password", stationsContainer);
     SSSC.init(); // Initialize
 });
 
