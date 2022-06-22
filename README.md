@@ -1,6 +1,6 @@
 # SSSC - Stupidly Simple Sprinkler Controller
 
-SIP Sprinkler Controller interface made in JavaScript by using the SIP Sprinkler Contrller HTTP GET commands.
+SIP Sprinkler Controller interface written in JavaScript, which uses the SIP Sprinkler Controller HTTP GET commands.
 <br>
 <br>
 SIP Sprinkler Controller: https://github.com/Dan-in-CA/SIP/
