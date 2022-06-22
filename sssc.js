@@ -30,9 +30,10 @@ let stationsContainer;
 
 
 class SprinklerController {
-    constructor(stations, server, appStationsContainer) {
+    constructor(stations, server, password, appStationsContainer) {
         this.stations = stations;
         this.server = server;
+        this.password = password
         this.stationsContainer = appStationsContainer;
     }
 
@@ -77,6 +78,13 @@ class SprinklerController {
     getStatus(stationID, callback = function(data, status) { console.log(data); console.log(status); }) {
         // Get the status of a specific station
         $.get(this.server + encodeURI("sn?sid=" + String(stationID)), function(data, status) {
+            callback(data, status);
+        });
+    }
+
+    runStation(stationID, timeAmount, callback = function(data, status) { console.log(data); console.log(status); }) {
+        // Run a station for a specified amount of time
+        $.post(this.server + encodeURI("cr?pw=" + String(this.password) + "&t=[" + String(stationID) + "," + String(timeAmount) +"]"), {}, function(data, status) {
             callback(data, status);
         });
     }
