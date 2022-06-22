@@ -55,14 +55,14 @@ class SprinklerController {
     <p class="station-status">Status: <span class="status-text running">Running</span></p>
 
     <div class="app-btn-container">
-        <button class="app-btn min-width-100" onclick="startStation(${station.station_id})">Start</button>
+        <button class="app-btn min-width-100" onclick="stopStation(${station.station_id})">Stop</button>
         <select class="app-btn min-width-100" id="station-time-${station.station_id}>
             <option value="1">1 Minute</option>
             <option value="5">5 Minutes</option>
             <option value="10">10 Minutes</option>
             <option value="30">30 Minutes</option>
         </select>
-        <button class="app-btn min-width-100" onclick="startStation(${station.station_id})">Stop</button>
+        <button class="app-btn min-width-100" onclick="startStation(${station.station_id})">Start</button>
     </div>
 
     <button class="close-btn app-btn" onclick="toggleStationPopup(${station.station_id});">
