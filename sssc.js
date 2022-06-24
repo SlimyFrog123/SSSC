@@ -91,12 +91,12 @@ class SprinklerController {
 
     <div class="app-btn-container">
         <button class="app-btn min-width-100" onclick="stopStation(${station.station_id})">Stop</button>
-        <select class="app-btn min-width-100" id="station-time-${station.station_id}">
+        <select class="app-btn min-width-100" id="station-time-${station.station_id}" onchange="handleTimeChange(${station.station_id});">
             <option value="1">1 Minute</option>
             <option value="5">5 Minutes</option>
             <option value="10">10 Minutes</option>
             <option value="30">30 Minutes</option>
-            <!-- <option value="">Custom</option> -->
+            <option value="-1" custom-val="">Custom</option>
         </select>
         <button class="app-btn min-width-100" onclick="startStation(${station.station_id})">Start</button>
     </div>
@@ -169,7 +169,7 @@ $(document).ready(function () {
     }, 10);
 
     setInterval(function () {
-        SSSC.refreshStations(); // Refresh the stations (check if they are running or not)
+        // SSSC.refreshStations(); // Refresh the stations (check if they are running or not)
     }, 500);
 });
 
@@ -185,16 +185,42 @@ function toggleStationPopup(stationID) {
     stationPopupBlur.toggleClass('visible');
 }
 
-function startStation(stationID) {
-    let timeAmount = Number($(`#station-time-${stationID}`).find(':selected').val());
+function handleTimeChange(stationID) {
+    let selected = $(`#station-time-${stationID}`).find(':selected'); // Get the selected option
+    let timeAmount = Number(selected.val()) // Get the selected option's value
 
     if (timeAmount === -1) {
-        alert(`Station ${stationID} set to run until stopped.`);
-        SSSC.startStation(stationID);
+        // If time amount value === -1, prompt the user to enter a custom value.
+        let customTime = window.prompt('How many minutes should the station run for?', ''); // Prompt the user
+        if (customTime == '' || customTime == null || isNaN(customTime)) {
+            console.log('User cancelled custom time prompt, or entered NaN.');
+            if (selected.attr('custom-val') == '') {
+                selected.attr('custom-val', '1'); // Set the custom value
+                selected.text(`1 minute (change)`);
+            }
+        } else {
+            customTime = Number(customTime);
+            selected.attr('custom-val', customTime);
+            selected.text(`${customTime} ${customTime === 1 ? "Minute" : "Minutes"} (change)`);
+        }
+    }
+}
+
+function startStation(stationID) {
+    let selected = $(`#station-time-${stationID}`).find(':selected');
+    let timeAmount = parseInt(selected.val());
+
+    if (timeAmount === -1) {
+        timeAmount = selected.attr('custom-val');
+        timeAmount = parseInt(timeAmount);
+
+        alert(`Station ${stationID} set to run for ${timeAmount} ${timeAmount === 1 ? "minute" : "minutes"}.`);
+        let secondsAmount = (timeAmount * 60); // Get the amount of seconds to run for
+        // SSSC.runStation(stationID, secondsAmount); // Run the station for the specified amount of time
     } else {
         alert(`Station ${stationID} set to run for ${timeAmount} ${timeAmount === 1 ? "minute" : "minutes"}.`);
         let secondsAmount = (timeAmount * 60); // Get the amount of seconds to run for
-        SSSC.runStation(stationID, secondsAmount); // Run the station for the specified amount of time
+        // SSSC.runStation(stationID, secondsAmount); // Run the station for the specified amount of time
     }
 }
 
