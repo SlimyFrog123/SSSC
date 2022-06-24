@@ -198,14 +198,38 @@ function handleTimeChange(stationID) {
                 selected.text(`1 minute (change)`);
             }
         } else {
-            if (isNaN(customTime)) {
-                alert('Please enter a number.');
+            if (isNaN(parseInt(customTime))) {
+                alert(`Please enter a number, ${customTime} is not a number.`);
                 if (selected.attr('custom-val') == '') {
                     selected.attr('custom-val', '1'); // Set the custom value
                     selected.text(`1 minute (change)`);
                 }
+            } else if (parseInt(customTime) === 0) {
+                alert('What do you want from me?');
+                if (selected.attr('custom-val') == '') {
+                    selected.attr('custom-val', '1'); // Set the custom value
+                    selected.text(`1 minute (change)`);
+                }
+            } else if (parseInt(customTime) < 0) {
+                alert('Think positive!');
+                if (selected.attr('custom-val') == '') {
+                    selected.attr('custom-val', '1'); // Set the custom value
+                    selected.text(`1 minute (change)`);
+                }
+            } else if (isFloat(parseFloat(customTime))) {
+                alert('Whole numbers only, please!');
+                if (window.confirm(`Would you like to round your number (${customTime}) to the nearest whole number?`)) {
+                    customTime = Number(Math.round(parseFloat(customTime)));
+                    selected.attr('custom-val', customTime);
+                    selected.text(`${customTime} ${customTime === 1 ? "Minute" : "Minutes"} (change)`);
+                } else {
+                    if (selected.attr('custom-val') == '') {
+                        selected.attr('custom-val', '1'); // Set the custom value
+                        selected.text(`1 minute (change)`);
+                    }
+                }
             } else {
-                customTime = Number(customTime);
+                customTime = Number(parseInt(customTime));
                 selected.attr('custom-val', customTime);
                 selected.text(`${customTime} ${customTime === 1 ? "Minute" : "Minutes"} (change)`);
             }
@@ -238,4 +262,8 @@ function stopStation(stationID) {
 
 function selectCustomTime(option) {
     console.log(option);
+}
+
+function isFloat(n) { // Source: https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
+    return Number(n) === n && n % 1 !== 0;
 }
