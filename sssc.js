@@ -192,16 +192,23 @@ function handleTimeChange(stationID) {
     if (timeAmount === -1) {
         // If time amount value === -1, prompt the user to enter a custom value.
         let customTime = window.prompt('How many minutes should the station run for?', ''); // Prompt the user
-        if (customTime == '' || customTime == null || isNaN(customTime)) {
-            console.log('User cancelled custom time prompt, or entered NaN.');
+        if (customTime == '' || customTime == null) {
             if (selected.attr('custom-val') == '') {
                 selected.attr('custom-val', '1'); // Set the custom value
                 selected.text(`1 minute (change)`);
             }
         } else {
-            customTime = Number(customTime);
-            selected.attr('custom-val', customTime);
-            selected.text(`${customTime} ${customTime === 1 ? "Minute" : "Minutes"} (change)`);
+            if (isNaN(customTime)) {
+                alert('Please enter a number.');
+                if (selected.attr('custom-val') == '') {
+                    selected.attr('custom-val', '1'); // Set the custom value
+                    selected.text(`1 minute (change)`);
+                }
+            } else {
+                customTime = Number(customTime);
+                selected.attr('custom-val', customTime);
+                selected.text(`${customTime} ${customTime === 1 ? "Minute" : "Minutes"} (change)`);
+            }
         }
     }
 }
