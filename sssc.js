@@ -63,6 +63,7 @@ let stations = [
 
 let SSSC;
 let stationsContainer;
+let professional = false; // Enable for responses to be professional
 
 
 class SprinklerController {
