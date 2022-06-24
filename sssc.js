@@ -51,8 +51,7 @@ class SprinklerController {
         this.stations.forEach(station => {
             this.stationsContainer.append(`<div id="station_${station.station_id}" data-station-id="${station.station_id}" class="station" onclick="stationClicked(${station.station_id});">${station.station_name}</div>`);
             body.append(`<div class="background-blur" id="bg-blur-${station.station_id}"></div>`);
-            body.append(`
-<div class="station-popup" id="station-popup-${station.station_id}">
+            body.append(`<div class="station-popup" id="station-popup-${station.station_id}">
     <h1 class="station-title text-center">Sprinkler ${station.station_name}</h1>
     
     <br>
