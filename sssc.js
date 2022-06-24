@@ -63,11 +63,11 @@ class SprinklerController {
     <div class="app-btn-container">
         <button class="app-btn min-width-100" onclick="stopStation(${station.station_id})">Stop</button>
         <select class="app-btn min-width-100" id="station-time-${station.station_id}">
-            <option value="-1">Until Stopped</option>
             <option value="1">1 Minute</option>
             <option value="5">5 Minutes</option>
             <option value="10">10 Minutes</option>
             <option value="30">30 Minutes</option>
+            <!-- <option value="">Custom</option> -->
         </select>
         <button class="app-btn min-width-100" onclick="startStation(${station.station_id})">Start</button>
     </div>
@@ -81,28 +81,28 @@ class SprinklerController {
 
     startStation(stationID, callback = function(data, status) { console.log(data); console.log(status); }) {
         // Start a specific station
-        $.post(this.server + encodeURI("sn?sid=" + String(stationID) + "&set_to=1"), {}, function(data, status) {
+        $.post(this.server + encodeURI('sn?sid=' + String(stationID) + '&set_to=1'), {}, function(data, status) {
             callback(data, status)
         });
     }
 
     stopStation(stationID, callback = function(data, status) { console.log(data); console.log(status); }) {
         // Stop a specific station
-        $.post(this.server + encodeURI("sn?sid=" + String(stationID) + "&set_to=0"), {}, function(data, status) {
+        $.post(this.server + encodeURI('sn?sid=' + String(stationID) + '&set_to=0'), {}, function(data, status) {
             callback(data, status)
         });
     }
 
     getStatus(stationID, callback = function(data, status) { console.log(data); console.log(status); }) {
         // Get the status of a specific station
-        $.get(this.server + encodeURI("sn?sid=" + String(stationID)), function(data, status) {
-            callback(data, status);
+        $.get(this.server + encodeURI("sn?pw=" + String(this.password) + "&sid=" + String(stationID)), function(data, status) {
+           callback(data, status);
         });
     }
 
     runStation(stationID, timeAmount, callback = function(data, status) { console.log(data); console.log(status); }) {
         // Run a station for a specified amount of time
-        $.post(this.server + encodeURI("cr?pw=" + String(this.password) + "&t=[" + String(stationID) + "," + String(timeAmount) +"]"), {}, function(data, status) {
+        $.post(this.server + encodeURI('cr?pw=' + String(this.password) + '&t=[' + String(stationID) + ',' + String(timeAmount) +']'), {}, function(data, status) {
             callback(data, status);
         });
     }
@@ -132,7 +132,7 @@ class SprinklerController {
 $(document).ready(function() {
     stationsContainer = $('#stations-container'); // Get the stations container
     
-    SSSC = new SprinklerController(stations, "http://127.0.0.1/sip/", "password", stationsContainer);
+    SSSC = new SprinklerController(stations, "http://192.168.1.140/", "opendoor", stationsContainer);
     SSSC.init(); // Initialize
 
     setInterval(function() {
@@ -140,7 +140,7 @@ $(document).ready(function() {
     }, 10);
 
     setInterval(function() {
-        // SSSC.refreshStations(); // Refresh the stations (check if they are running or not)
+        SSSC.refreshStations(); // Refresh the stations (check if they are running or not)
     }, 500);
 });
 
@@ -172,4 +172,8 @@ function startStation(stationID) {
 function stopStation(stationID) {
     alert(`Station ${stationID} stopped.`);
     SSSC.stopStation(stationID);
+}
+
+function selectCustomTime(option) {
+    console.log(option);
 }
