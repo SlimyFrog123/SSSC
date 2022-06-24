@@ -28,6 +28,36 @@ let stations = [
         'station_description': 'Station E',
         'station_id': 5,
         'running': false
+    },
+    {
+        'station_name': 'F',
+        'station_description': 'Station F',
+        'station_id': 6,
+        'running': false
+    },
+    {
+        'station_name': 'G',
+        'station_description': 'Station G',
+        'station_id': 7,
+        'running': false
+    },
+    {
+        'station_name': 'H',
+        'station_description': 'Station H',
+        'station_id': 8,
+        'running': false
+    },
+    {
+        'station_name': 'I',
+        'station_description': 'Station I',
+        'station_id': 9,
+        'running': false
+    },
+    {
+        'station_name': 'J',
+        'station_description': 'Station J',
+        'station_id': 10,
+        'running': false
     }
 ];
 
