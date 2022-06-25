@@ -196,41 +196,46 @@ function handleTimeChange(stationID) {
         if (customTime == '' || customTime == null) {
             if (selected.attr('custom-val') == '') {
                 selected.attr('custom-val', '1'); // Set the custom value
-                selected.text(`1 minute (change)`);
+                selected.text(`1 Minute (change)`);
             }
         } else {
             if (isNaN(parseInt(customTime))) {
                 alert(`Please enter a number, ${customTime} is not a number.`);
+
                 if (selected.attr('custom-val') == '') {
                     selected.attr('custom-val', '1'); // Set the custom value
-                    selected.text(`1 minute (change)`);
+                    selected.text(`1 Minute (change)`);
                 }
             } else if (parseInt(customTime) === 0) {
-                alert('What do you want from me?');
+                if (!professional) { alert('What do you want from me?'); }
+
                 if (selected.attr('custom-val') == '') {
                     selected.attr('custom-val', '1'); // Set the custom value
-                    selected.text(`1 minute (change)`);
+                    selected.text(`1 Minute (change)`);
                 }
             } else if (parseInt(customTime) < 0) {
-                alert('Think positive!');
+                alert(professional ? 'Please enter a positive number.' : 'Think positive!');
                 if (selected.attr('custom-val') == '') {
                     selected.attr('custom-val', '1'); // Set the custom value
-                    selected.text(`1 minute (change)`);
+                    selected.text(`1 Minute (change)`);
                 }
             } else if (isFloat(parseFloat(customTime))) {
-                alert('Whole numbers only, please!');
+                alert(professional ? 'Please enter a whole number.' : 'Whole numbers only, please!');
+
                 if (window.confirm(`Would you like to round your number (${customTime}) to the nearest whole number?`)) {
                     customTime = Number(Math.round(parseFloat(customTime)));
+                    
                     selected.attr('custom-val', customTime);
                     selected.text(`${customTime} ${customTime === 1 ? "Minute" : "Minutes"} (change)`);
                 } else {
                     if (selected.attr('custom-val') == '') {
                         selected.attr('custom-val', '1'); // Set the custom value
-                        selected.text(`1 minute (change)`);
+                        selected.text(`1 Minute (change)`);
                     }
                 }
             } else {
                 customTime = Number(parseInt(customTime));
+
                 selected.attr('custom-val', customTime);
                 selected.text(`${customTime} ${customTime === 1 ? "Minute" : "Minutes"} (change)`);
             }
